@@ -21,9 +21,17 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container">
+    <div class="container-fluid">
       <div class="header">
         <h3 class="text-muted">Job Application Tracker</h3>
+      </div>
+
+      <div class="row">
+        <application-list class="col-md-10 col-md-offset-1"></application-list>
+      </div>
+      <hr>
+      <div class="row">
+        <application_add class="col-md-4 col-md-offset-1"></application_add>
       </div>
 
       <div class="footer">
@@ -58,8 +66,11 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="components/applicationList/applicationList.js"></script>
+    <script src="components/applicationManager/applicationAdd.js"></script>
+    <script src="components/applicationFactory.js"></script>
+    <!-- endbuild -->
 </body>
 </html>
