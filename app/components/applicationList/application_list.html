@@ -16,9 +16,21 @@
     <td>{{$index}}</td>
     <td>{{entry.company}}</td>
     <td><a href="{{entry.link}}" target="_blank">{{entry.position}}</a></td>
-    <td>{{entry.status}}</td>
+
+    <td class="dropdown dropdown-toggle" dropdown dropdown-toggle>
+      <a href >{{entry.status}}</a>
+      <ul class="dropdown-menu">
+        <li ng-repeat="choice in ctrl.statusList">
+          <a ng-click="ctrl.updateStatus($parent.$index, $index)" href>{{choice}}</a>
+        </li>
+      </ul>
+    </td>
+
     <td>{{entry.date|date:'shortDate'}}</td>
     <td>{{entry.note}}</td>
+
+
+
   </tr>
   </tbody>
 </table>

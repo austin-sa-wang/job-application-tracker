@@ -23,7 +23,7 @@ angular.module('applicationAdd', ['applicationFactory'])
       var newApplication = JSON.parse(JSON.stringify(this.application));
       clearInputFields(this.application);
 
-      newApplication.status = 'Submitted';
+      newApplication.status = ApplicationFactory.STATUS_CODE[0];
       newApplication.date = Date.now();
       newApplication.note = '';
 
