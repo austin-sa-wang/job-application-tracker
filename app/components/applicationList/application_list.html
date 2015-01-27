@@ -15,9 +15,9 @@
   <tr ng-repeat="entry in ctrl.applications">
     <td>{{$index}}</td>
     <td>{{entry.company}}</td>
-    <td>{{entry.position}}</td>
+    <td><a href="{{entry.link}}" target="_blank">{{entry.position}}</a></td>
     <td>{{entry.status}}</td>
-    <td>{{entry.date}}</td>
+    <td>{{entry.date|date:'shortDate'}}</td>
     <td>{{entry.note}}</td>
   </tr>
   </tbody>

@@ -10,22 +10,24 @@ angular.module('applicationAdd', ['applicationFactory'])
     this.application = {
       company: '',
       position: '',
-      status: '',
-      date: '',
-      note: ''
+      link: ''
     };
 
-    var clearInputFields = function (vm) {
-      vm.company = '';
-      vm.position = '';
-      vm.status = '';
-      vm.date = '';
-      vm.note = '';
+    var clearInputFields = function (model) {
+      model.company = '';
+      model.position = '';
+      model.link = '';
     };
 
     this.addApplication = function () {
-      ApplicationFactory.addApplication(this.application);
+      var newApplication = JSON.parse(JSON.stringify(this.application));
       clearInputFields(this.application);
+
+      newApplication.status = 'Submitted';
+      newApplication.date = Date.now();
+      newApplication.note = '';
+
+      ApplicationFactory.addApplication(newApplication);
     };
   })
 

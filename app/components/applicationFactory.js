@@ -18,8 +18,7 @@ angular.module('applicationFactory', [])
     };
 
     ApplicationFactory.addApplication = function (applicationEntry) {
-      var entryClone = JSON.parse(JSON.stringify(applicationEntry));
-      applications.push(entryClone);
+      applications.push(applicationEntry);
 
       // TODO: Reverse the direction. Observe changes to applications instead of calling manually
       // Use angular.Json to filter out ng-repeat book-keeping headers ($$hash)
