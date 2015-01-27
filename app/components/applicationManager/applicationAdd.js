@@ -7,14 +7,17 @@
 angular.module('applicationAdd', ['applicationFactory'])
 
   .controller('applicationAddCtrl', function (ApplicationFactory) {
-    this.company = '';
+    this.application = {
+      company: ''
+    };
+
+    var clearInputFields = function () {
+      this.application.company = '';
+    };
 
     this.addApplication = function () {
-      var newEntry = {
-        company: this.company
-      };
-
-      ApplicationFactory.addApplication(newEntry);
+      ApplicationFactory.addApplication(this.application);
+      clearInputFields.call(this);
     };
   })
 
