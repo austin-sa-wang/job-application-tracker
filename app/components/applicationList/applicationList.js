@@ -6,7 +6,7 @@
 angular.module('applicationList', ['applicationFactory'])
 
   .controller('applicationListCtrl', function (ApplicationFactory) {
-    this.entries = ApplicationFactory.getApplications();
+    this.applications = ApplicationFactory.getApplications();
   })
 
   .directive('applicationList', function () {

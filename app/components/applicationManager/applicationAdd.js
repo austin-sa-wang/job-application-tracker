@@ -8,16 +8,24 @@ angular.module('applicationAdd', ['applicationFactory'])
 
   .controller('applicationAddCtrl', function (ApplicationFactory) {
     this.application = {
-      company: ''
+      company: '',
+      position: '',
+      status: '',
+      date: '',
+      note: ''
     };
 
-    var clearInputFields = function () {
-      this.application.company = '';
+    var clearInputFields = function (vm) {
+      vm.company = '';
+      vm.position = '';
+      vm.status = '';
+      vm.date = '';
+      vm.note = '';
     };
 
     this.addApplication = function () {
       ApplicationFactory.addApplication(this.application);
-      clearInputFields.call(this);
+      clearInputFields(this.application);
     };
   })
 

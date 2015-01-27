@@ -1,14 +1,24 @@
+<!-- Issue: Hard coded column names and data references makes it hard to manage -->
+
 <table class="table table-bordered table-condensed">
   <thead>
   <tr>
     <th>#</th>
-    <th>company</th>
+    <th>Company</th>
+    <th>Position</th>
+    <th>Status</th>
+    <th>Date</th>
+    <th>Note</th>
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="entry in ctrl.entries">
-    <td>{{$index}}</td><td>{{entry.company}}</td>
+  <tr ng-repeat="entry in ctrl.applications">
+    <td>{{$index}}</td>
+    <td>{{entry.company}}</td>
+    <td>{{entry.position}}</td>
+    <td>{{entry.status}}</td>
+    <td>{{entry.date}}</td>
+    <td>{{entry.note}}</td>
   </tr>
   </tbody>
 </table>
-
