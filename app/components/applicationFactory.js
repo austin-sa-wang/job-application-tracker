@@ -8,7 +8,8 @@ angular.module('applicationFactory', [])
 
   .factory('ApplicationFactory', function ApplicationFactory () {
     var STORAGE_IDENTIFIER = 'applications';
-    ApplicationFactory.STATUS_CODE = [
+
+    var STATUS_CODE = [
       'Submitted',
       'HR Interview',
       '1st Interview',
@@ -25,6 +26,10 @@ angular.module('applicationFactory', [])
       return applications;
     };
 
+    ApplicationFactory.getStatusCode = function () {
+      return STATUS_CODE;
+    };
+
     /**
      * Add a new application to the list
      * @param {Object} applicationEntry
@@ -38,11 +43,11 @@ angular.module('applicationFactory', [])
 
     /**
      * Update application status
-     * @param {Object} applicationEntry
-     * @param {String} newStatus
+     * @param {int} applicationEntry
+     * @param {int} newStatus
      */
     ApplicationFactory.updateStatus = function (applicationIndex, statusCode) {
-      applications[applicationIndex].status = ApplicationFactory.STATUS_CODE[statusCode];
+      applications[applicationIndex].status = STATUS_CODE[statusCode];
 
       // TODO: Reverse the direction. Observe changes to applications instead of calling manually
       ApplicationFactory.updateStorage();

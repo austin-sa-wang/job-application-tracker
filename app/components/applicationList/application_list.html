@@ -20,7 +20,7 @@
     <td class="dropdown dropdown-toggle" dropdown dropdown-toggle>
       <a href >{{entry.status}}</a>
       <ul class="dropdown-menu">
-        <li ng-repeat="choice in ctrl.statusList">
+        <li ng-repeat="choice in ctrl.statusCode">
           <a ng-click="ctrl.updateStatus($parent.$index, $index)" href>{{choice}}</a>
         </li>
       </ul>
@@ -28,9 +28,6 @@
 
     <td>{{entry.date|date:'shortDate'}}</td>
     <td>{{entry.note}}</td>
-
-
-
   </tr>
   </tbody>
 </table>
