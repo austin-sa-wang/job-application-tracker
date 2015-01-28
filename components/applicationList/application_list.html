@@ -1,0 +1,33 @@
+<!-- Issue: Hard coded column names and data references makes it hard to manage -->
+
+<table class="table table-bordered table-condensed">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Company</th>
+    <th>Position</th>
+    <th>Status</th>
+    <th>Date</th>
+    <th>Note</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="entry in ctrl.applications">
+    <td>{{$index}}</td>
+    <td>{{entry.company}}</td>
+    <td><a href="{{entry.link}}" target="_blank">{{entry.position}}</a></td>
+
+    <td class="dropdown dropdown-toggle" dropdown dropdown-toggle>
+      <a href >{{entry.status}}</a>
+      <ul class="dropdown-menu">
+        <li ng-repeat="choice in ctrl.statusCode">
+          <a ng-click="ctrl.updateStatus($parent.$index, $index)" href>{{choice}}</a>
+        </li>
+      </ul>
+    </td>
+
+    <td>{{entry.date|date:'shortDate'}}</td>
+    <td>{{entry.note}}</td>
+  </tr>
+  </tbody>
+</table>
