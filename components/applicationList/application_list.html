@@ -27,7 +27,10 @@
     </td>
 
     <td>{{entry.date|date:'shortDate'}}</td>
-    <td>{{entry.note}}</td>
+    <td class="dropdown dropdown-toggle" toggled-display toggled-display-toggle on-toggle="ctrl.textareaToggled(open, $index)">
+      {{entry.note}}
+      <textarea class="toggled-display-area" toggled-display-area></textarea>
+    </td>
   </tr>
   </tbody>
 </table>

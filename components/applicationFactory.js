@@ -43,14 +43,35 @@ angular.module('applicationFactory', [])
 
     /**
      * Update application status
-     * @param {int} applicationEntry
-     * @param {int} newStatus
+     * @param {Int} applicationIndex
+     * @param {Int} statusCode
      */
     ApplicationFactory.updateStatus = function (applicationIndex, statusCode) {
       applications[applicationIndex].status = STATUS_CODE[statusCode];
 
       // TODO: Reverse the direction. Observe changes to applications instead of calling manually
       ApplicationFactory.updateStorage();
+    };
+
+    /**
+     * Update application note
+     * @param {Int} applicationEntry
+     * @param {Int} newNote
+     */
+    ApplicationFactory.updateNote = function (applicationIndex, newNote) {
+      applications[applicationIndex].note = newNote;
+
+      // TODO: Reverse the direction. Observe changes to applications instead of calling manually
+      ApplicationFactory.updateStorage();
+    };
+
+    /**
+     * Get application note give list index
+     * @param {Int} applicationIndex
+     * @returns {String}
+     */
+    ApplicationFactory.getNote = function (applicationIndex) {
+      return applications[applicationIndex].note;
     };
 
     /**
