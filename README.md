@@ -13,6 +13,8 @@ There are only two differences:
 1. Use customized css rules for show&hide instead of the default Twitter Bootstrap "dropdown-menu" class
 2. The element which gets toggled does not close (toggle close) itself when clicked on. This element should be identified with the `toggled-display-area` directive
 
+Instead of replacing the official library with a custom build, this component is segregated into its own module at `components/toggledDisplayDirective.js`.
+
 Framework, Library, Tooling
 ------
 AngularJS, AngularJS UI Bootstrap, Twitter Bootstrap, Bower, Grunt
