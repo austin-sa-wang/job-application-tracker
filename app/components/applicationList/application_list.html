@@ -1,5 +1,4 @@
 <!-- Issue: Hard coded column names and data references makes it hard to manage -->
-
 <table class="table table-bordered table-condensed">
   <thead>
   <tr>
@@ -16,7 +15,6 @@
     <td>{{$index}}</td>
     <td>{{entry.company}}</td>
     <td><a href="{{entry.link}}" target="_blank">{{entry.position}}</a></td>
-
     <td class="dropdown dropdown-toggle" dropdown dropdown-toggle>
       <a href >{{entry.status}}</a>
       <ul class="dropdown-menu">
@@ -25,11 +23,13 @@
         </li>
       </ul>
     </td>
-
     <td>{{entry.date|date:'shortDate'}}</td>
     <td class="dropdown dropdown-toggle" toggled-display toggled-display-toggle on-toggle="ctrl.textareaToggled(open, $index)">
       {{entry.note}}
       <textarea class="toggled-display-area" toggled-display-area></textarea>
+    </td>
+    <td>
+      <button class="btn btn-xs" ng-click="ctrl.removeApplication($index)" aria-label="Remove">X</button>
     </td>
   </tr>
   </tbody>

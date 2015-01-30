@@ -17,6 +17,11 @@
   display: block;
 }
 
+/* Keep the remove button column width to minimal */
+tr > td:last-child {
+  width: 1%;
+}
+
 /* Space out content a bit */
 body {
   padding-top: 20px;
