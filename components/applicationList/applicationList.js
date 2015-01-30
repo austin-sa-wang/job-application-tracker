@@ -7,9 +7,18 @@ angular.module('applicationList', ['applicationFactory', 'ui.bootstrap', 'ui.boo
 
   .controller('applicationListCtrl', function (ApplicationFactory) {
     var _this = this;
+
+    //this.statusOrderFilter = function (item) {
+    //  item.status
+    //};
+
     this.applications = ApplicationFactory.getApplications();
 
     this.statusCode = ApplicationFactory.getStatusCode();
+
+    this.removeApplication = function(index) {
+      ApplicationFactory.removeApplication(index);
+    };
 
     /**
      * Callback to update status. As well, update date to today to reflect last updated date
@@ -44,7 +53,6 @@ angular.module('applicationList', ['applicationFactory', 'ui.bootstrap', 'ui.boo
         ApplicationFactory.updateNote( index, textarea(index).val() );
       }
     };
-
   })
 
   .directive('applicationList', function () {

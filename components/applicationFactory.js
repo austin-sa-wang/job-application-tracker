@@ -42,6 +42,17 @@ angular.module('applicationFactory', [])
     };
 
     /**
+     * Remove an existing application from the list
+     * @param {int} applicationIndex
+     */
+    ApplicationFactory.removeApplication = function (applicationIndex) {
+      applications.splice(applicationIndex, 1);
+
+      // TODO: Reverse the direction. Observe changes to applications instead of calling manually
+      ApplicationFactory.updateStorage();
+    };
+
+    /**
      * Update application status
      * @param {Int} applicationIndex
      * @param {Int} statusCode
