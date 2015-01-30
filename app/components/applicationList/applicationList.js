@@ -16,19 +16,19 @@ angular.module('applicationList', ['applicationFactory', 'ui.bootstrap', 'ui.boo
 
     this.statusCode = ApplicationFactory.getStatusCode();
 
-    this.removeApplication = function(index) {
-      ApplicationFactory.removeApplication(index);
+    this.removeApplication = function(applicationEntry) {
+      ApplicationFactory.removeApplication(applicationEntry);
     };
 
     /**
      * Callback to update status. As well, update date to today to reflect last updated date
      * Used in application_list.html's nested ng-repeat for status dropdown menu
-     * @param {Int} applicationIndex
-     * @param {Int} statusCode
+     * @param {!Application} applicationEntry
+     * @param {String} status
      */
-    this.updateStatus = function (applicationIndex, statusCode) {
-      ApplicationFactory.updateStatus(applicationIndex, statusCode);
-      ApplicationFactory.updateDate(applicationIndex, Date.now());
+    this.updateStatus = function (applicationEntry, status) {
+      ApplicationFactory.updateStatus(applicationEntry, status);
+      ApplicationFactory.updateDate(applicationEntry, Date.now());
     };
 
     /**
@@ -45,12 +45,13 @@ angular.module('applicationList', ['applicationFactory', 'ui.bootstrap', 'ui.boo
      * Used in application_list.html's toggledDisplay
      * @param {Boolean} isOpen
      * @param {Int} index
+     * @param {!Application} applicationEntry
      */
-    this.textareaToggled = function(isOpen, index) {
+    this.textareaToggled = function(isOpen, index, applicationEntry) {
       if (isOpen) {
         textarea(index).val( ApplicationFactory.getNote(index) );
       } else {
-        ApplicationFactory.updateNote( index, textarea(index).val() );
+        ApplicationFactory.updateNote( applicationEntry, textarea(index).val() );
       }
     };
   })

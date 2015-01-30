@@ -43,10 +43,10 @@ angular.module('applicationFactory', [])
 
     /**
      * Remove an existing application from the list
-     * @param {int} applicationIndex
+     * @param {!Application} applicationEntry
      */
-    ApplicationFactory.removeApplication = function (applicationIndex) {
-      applications.splice(applicationIndex, 1);
+    ApplicationFactory.removeApplication = function (applicationEntry) {
+      applications.splice(applications.indexOf(applicationEntry), 1);
 
       // TODO: Reverse the direction. Observe changes to applications instead of calling manually
       ApplicationFactory.updateStorage();
@@ -54,11 +54,11 @@ angular.module('applicationFactory', [])
 
     /**
      * Update application status
-     * @param {Int} applicationIndex
+     * @param {!Application} applicationEntry
      * @param {Int} statusCode
      */
-    ApplicationFactory.updateStatus = function (applicationIndex, statusCode) {
-      applications[applicationIndex].status = STATUS_CODE[statusCode];
+    ApplicationFactory.updateStatus = function (applicationEntry, status) {
+      applicationEntry.status = status;
 
       // TODO: Reverse the direction. Observe changes to applications instead of calling manually
       ApplicationFactory.updateStorage();
@@ -66,11 +66,11 @@ angular.module('applicationFactory', [])
 
     /**
      *
-     * @param {int} applicationIndex
+     * @param {!Application} applicationEntry
      * @param {!Date} newDate Javascript Native Date Object
      */
-    ApplicationFactory.updateDate = function (applicationIndex, newDate) {
-      applications[applicationIndex].date = newDate;
+    ApplicationFactory.updateDate = function (applicationEntry, newDate) {
+      applicationEntry.date = newDate;
     };
 
     /**
@@ -78,8 +78,8 @@ angular.module('applicationFactory', [])
      * @param {Int} applicationEntry
      * @param {Int} newNote
      */
-    ApplicationFactory.updateNote = function (applicationIndex, newNote) {
-      applications[applicationIndex].note = newNote;
+    ApplicationFactory.updateNote = function (applicationEntry, newNote) {
+      applicationEntry.note = newNote;
 
       // TODO: Reverse the direction. Observe changes to applications instead of calling manually
       ApplicationFactory.updateStorage();
@@ -87,11 +87,11 @@ angular.module('applicationFactory', [])
 
     /**
      * Get application note give list index
-     * @param {Int} applicationIndex
+     * @param {!Application} applicationEntry
      * @returns {String}
      */
     ApplicationFactory.getNote = function (applicationIndex) {
-      return applications[applicationIndex].note;
+      return applicationIndex.note;
     };
 
     /**

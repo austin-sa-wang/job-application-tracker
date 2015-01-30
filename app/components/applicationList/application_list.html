@@ -19,17 +19,17 @@
       <a href >{{entry.status}}</a>
       <ul class="dropdown-menu">
         <li ng-repeat="choice in ctrl.statusCode">
-          <a ng-click="ctrl.updateStatus($parent.$index, $index)" href>{{choice}}</a>
+          <a ng-click="ctrl.updateStatus(entry, choice)" href>{{choice}}</a>
         </li>
       </ul>
     </td>
     <td>{{entry.date|date:'shortDate'}}</td>
-    <td class="dropdown dropdown-toggle" toggled-display toggled-display-toggle on-toggle="ctrl.textareaToggled(open, $index)">
+    <td class="dropdown dropdown-toggle" toggled-display toggled-display-toggle on-toggle="ctrl.textareaToggled(open, $index, entry)">
       {{entry.note}}
       <textarea class="toggled-display-area" toggled-display-area></textarea>
     </td>
     <td>
-      <button class="btn btn-xs" ng-click="ctrl.removeApplication($index)" aria-label="Remove">X</button>
+      <button class="btn btn-xs" ng-click="ctrl.removeApplication(entry)" aria-label="Remove">X</button>
     </td>
   </tr>
   </tbody>
