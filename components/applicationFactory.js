@@ -54,6 +54,15 @@ angular.module('applicationFactory', [])
     };
 
     /**
+     *
+     * @param {int} applicationIndex
+     * @param {!Date} newDate Javascript Native Date Object
+     */
+    ApplicationFactory.updateDate = function (applicationIndex, newDate) {
+      applications[applicationIndex].date = newDate;
+    };
+
+    /**
      * Update application note
      * @param {Int} applicationEntry
      * @param {Int} newNote

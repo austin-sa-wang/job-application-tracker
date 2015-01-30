@@ -12,13 +12,14 @@ angular.module('applicationList', ['applicationFactory', 'ui.bootstrap', 'ui.boo
     this.statusCode = ApplicationFactory.getStatusCode();
 
     /**
-     * Callback to update status
+     * Callback to update status. As well, update date to today to reflect last updated date
      * Used in application_list.html's nested ng-repeat for status dropdown menu
      * @param {Int} applicationIndex
      * @param {Int} statusCode
      */
     this.updateStatus = function (applicationIndex, statusCode) {
       ApplicationFactory.updateStatus(applicationIndex, statusCode);
+      ApplicationFactory.updateDate(applicationIndex, Date.now());
     };
 
     /**

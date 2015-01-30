@@ -19,11 +19,15 @@ angular.module('applicationAdd', ['applicationFactory'])
       model.link = '';
     };
 
+    /**
+     * Add a new application to the list
+     * Set initial status to 'To Apply', date to today, and note to empty string
+     */
     this.addApplication = function () {
       var newApplication = JSON.parse(JSON.stringify(this.application));
       clearInputFields(this.application);
 
-      newApplication.status = ApplicationFactory.getStatusCode()[0];
+      newApplication.status = 'To Apply';
       newApplication.date = Date.now();
       newApplication.note = '';
 
