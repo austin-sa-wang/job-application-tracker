@@ -4,9 +4,9 @@
  * Application Add component
  * UI to add applications
  */
-angular.module('applicationAdd', ['applicationFactory'])
+angular.module('applicationAdd', ['applicationFactory', 'applicationStatusFactory'])
 
-  .controller('applicationAddCtrl', function (ApplicationFactory) {
+  .controller('applicationAddCtrl', function (ApplicationFactory, ApplicationStatusFactory) {
     this.application = {
       company: '',
       position: '',
@@ -27,7 +27,7 @@ angular.module('applicationAdd', ['applicationFactory'])
       var newApplication = JSON.parse(JSON.stringify(this.application));
       clearInputFields(this.application);
 
-      newApplication.status = 'To Apply';
+      newApplication.status = ApplicationStatusFactory.APPLY.name;
       newApplication.date = Date.now();
       newApplication.note = '';
 

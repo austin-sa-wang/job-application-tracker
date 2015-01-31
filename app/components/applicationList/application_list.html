@@ -18,8 +18,8 @@
     <td class="dropdown dropdown-toggle" dropdown dropdown-toggle>
       <a href >{{entry.status}}</a>
       <ul class="dropdown-menu">
-        <li ng-repeat="choice in ctrl.statusCode">
-          <a ng-click="ctrl.updateStatus(entry, choice)" href>{{choice}}</a>
+        <li ng-repeat="status in ctrl.statusList">
+          <a ng-click="ctrl.updateStatus(entry, status)" href>{{status.name}}</a>
         </li>
       </ul>
     </td>

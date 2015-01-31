@@ -3,9 +3,9 @@
 /**
  * Application List component
  */
-angular.module('applicationList', ['applicationFactory', 'ui.bootstrap', 'ui.bootstrap.toggledDisplay'])
+angular.module('applicationList', ['applicationFactory', 'applicationStatusFactory', 'ui.bootstrap', 'ui.bootstrap.toggledDisplay'])
 
-  .controller('applicationListCtrl', function (ApplicationFactory) {
+  .controller('applicationListCtrl', function (ApplicationFactory, ApplicationStatusFactory) {
     var _this = this;
 
     //this.statusOrderFilter = function (item) {
@@ -14,7 +14,7 @@ angular.module('applicationList', ['applicationFactory', 'ui.bootstrap', 'ui.boo
 
     this.applications = ApplicationFactory.getApplications();
 
-    this.statusCode = ApplicationFactory.getStatusCode();
+    this.statusList = ApplicationStatusFactory.getStatusList();
 
     this.removeApplication = function(applicationEntry) {
       ApplicationFactory.removeApplication(applicationEntry);
@@ -27,7 +27,7 @@ angular.module('applicationList', ['applicationFactory', 'ui.bootstrap', 'ui.boo
      * @param {String} status
      */
     this.updateStatus = function (applicationEntry, status) {
-      ApplicationFactory.updateStatus(applicationEntry, status);
+      ApplicationFactory.updateStatus(applicationEntry, status.name);
       ApplicationFactory.updateDate(applicationEntry, Date.now());
     };
 

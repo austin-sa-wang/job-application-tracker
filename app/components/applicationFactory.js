@@ -9,25 +9,12 @@ angular.module('applicationFactory', [])
   .factory('ApplicationFactory', function ApplicationFactory () {
     var STORAGE_IDENTIFIER = 'applications';
 
-    var STATUS_CODE = [
-      'Submitted',
-      'HR Interview',
-      '1st Interview',
-      '2nd Interview',
-      'Accepted',
-      'Rejected'
-    ];
-
     // Initialize applications list from localStorage, else initialize to empty array
     var applications = JSON.parse(localStorage.getItem(STORAGE_IDENTIFIER)) || [];
 
     // TOFIX: This doesn't protect the data
     ApplicationFactory.getApplications = function () {
       return applications;
-    };
-
-    ApplicationFactory.getStatusCode = function () {
-      return STATUS_CODE;
     };
 
     /**
