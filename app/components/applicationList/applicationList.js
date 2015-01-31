@@ -49,10 +49,27 @@ angular.module('applicationList', ['applicationFactory', 'applicationStatusFacto
      */
     this.textareaToggled = function(isOpen, index, applicationEntry) {
       if (isOpen) {
-        textarea(index).val( ApplicationFactory.getNote(index) );
+        textarea(index).val( ApplicationFactory.getNote(applicationEntry) );
       } else {
         ApplicationFactory.updateNote( applicationEntry, textarea(index).val() );
       }
+    };
+
+    // List ordering
+    this.predicate = 'company';
+    this.reverse = false;
+    var prevPredicate = '';
+
+    var toggleOrder = function () {
+      _this.reverse = !_this.reverse;
+    };
+
+    this.orderByDate = function () {
+      if (prevPredicate === 'date') {
+        toggleOrder();
+      }
+      _this.predicate = 'date';
+      prevPredicate = _this.predicate;
     };
   })
 

@@ -1,4 +1,5 @@
 <!-- Issue: Hard coded column names and data references makes it hard to manage -->
+<pre>Sorting predicate = {{ctrl.predicate}}; reverse = {{ctrl.reverse}}</pre>
 <table class="table table-bordered table-condensed">
   <thead>
   <tr>
@@ -6,12 +7,12 @@
     <th>Company</th>
     <th>Position</th>
     <th>Status</th>
-    <th>Last Updated</th>
+    <th><a ng-click="ctrl.orderByDate()" href>Last Updated</a></th>
     <th>Note</th>
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="entry in ctrl.applications">
+  <tr ng-repeat="entry in ctrl.applications | orderBy:ctrl.predicate:ctrl.reverse">
     <td>{{$index}}</td>
     <td>{{entry.company}}</td>
     <td><a href="{{entry.link}}" target="_blank">{{entry.position}}</a></td>
