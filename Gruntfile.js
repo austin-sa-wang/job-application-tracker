@@ -124,7 +124,8 @@ module.exports = function (grunt) {
         src: [
           'Gruntfile.js',
           '<%= yeoman.app %>/scripts/{,*/}*.js',
-          '<%= yeoman.app %>/components/{,*/}*.js'
+          '<%= yeoman.app %>/components/{,*/}*.js',
+          '!<%= yeoman.app %>/components/toggledDisplayDirective.js'
         ]
       },
       test: {
