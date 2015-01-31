@@ -15,7 +15,7 @@ angular.module('applicationStatusFactory', [])
     ApplicationStatusFactory.FIRST = new Status('1st Interview', 3);
     ApplicationStatusFactory.SECOND = new Status('2nd Interview', 4);
     ApplicationStatusFactory.ACCEPT = new Status('Accepted', 5);
-    ApplicationStatusFactory.REJECT = new Status('Rejected', -1);
+    ApplicationStatusFactory.REJECT = new Status('Rejected', 6);
 
     // List constructed with all status objects, picked out by using instanceof Status
     var statusList = (function () {
@@ -32,6 +32,12 @@ angular.module('applicationStatusFactory', [])
 
     ApplicationStatusFactory.getStatusList = function () {
       return statusList;
+    };
+
+    ApplicationStatusFactory.getStatusValueFunction = function () {
+      return function (entry) {
+        return entry.status.order;
+      };
     };
 
     return ApplicationStatusFactory;

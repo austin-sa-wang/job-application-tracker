@@ -1,13 +1,12 @@
 <!-- Issue: Hard coded column names and data references makes it hard to manage -->
-<pre>Sorting predicate = {{ctrl.predicate}}; reverse = {{ctrl.reverse}}</pre>
 <table class="table table-bordered table-condensed">
   <thead>
   <tr>
     <th>#</th>
     <th>Company</th>
     <th>Position</th>
-    <th>Status</th>
-    <th><a ng-click="ctrl.orderByDate()" href>Last Updated</a></th>
+    <th><a ng-click="ctrl.changePredicate(ctrl.orderByStatus)" href>Status</a></th>
+    <th><a ng-click="ctrl.changePredicate(ctrl.orderByDate)" href>Last Updated</a></th>
     <th>Note</th>
   </tr>
   </thead>
@@ -17,7 +16,7 @@
     <td>{{entry.company}}</td>
     <td><a href="{{entry.link}}" target="_blank">{{entry.position}}</a></td>
     <td class="dropdown dropdown-toggle" dropdown dropdown-toggle>
-      <a href >{{entry.status}}</a>
+      <a href >{{entry.status.name}}</a>
       <ul class="dropdown-menu">
         <li ng-repeat="status in ctrl.statusList">
           <a ng-click="ctrl.updateStatus(entry, status)" href>{{status.name}}</a>

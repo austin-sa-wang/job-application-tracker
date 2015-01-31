@@ -27,7 +27,7 @@ angular.module('applicationList', ['applicationFactory', 'applicationStatusFacto
      * @param {String} status
      */
     this.updateStatus = function (applicationEntry, status) {
-      ApplicationFactory.updateStatus(applicationEntry, status.name);
+      ApplicationFactory.updateStatus(applicationEntry, status);
       ApplicationFactory.updateDate(applicationEntry, Date.now());
     };
 
@@ -60,15 +60,22 @@ angular.module('applicationList', ['applicationFactory', 'applicationStatusFacto
     this.reverse = false;
     var prevPredicate = '';
 
+    this.orderByDate = 'date';
+    this.orderByStatus = ApplicationStatusFactory.getStatusValueFunction();
+
     var toggleOrder = function () {
       _this.reverse = !_this.reverse;
     };
 
-    this.orderByDate = function () {
-      if (prevPredicate === 'date') {
+    /**
+     * Change predicate for ordering the applications
+     * @param {String|Function|Array} newPredicate
+     */
+    this.changePredicate = function (newPredicate) {
+      if (prevPredicate === newPredicate) {
         toggleOrder();
       }
-      _this.predicate = 'date';
+      _this.predicate = newPredicate;
       prevPredicate = _this.predicate;
     };
   })
