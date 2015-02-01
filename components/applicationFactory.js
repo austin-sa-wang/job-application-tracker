@@ -4,30 +4,16 @@
  * ApplicationFactory
  * Manage applications.
  */
-angular.module('applicationFactory', [])
+angular.module('applicationFactory', ['dataPersistenceFactory'])
 
-  .factory('ApplicationFactory', function ApplicationFactory () {
+  .factory('ApplicationFactory', function ApplicationFactory (DataPersistenceFactory) {
     var STORAGE_IDENTIFIER = 'applications';
 
-    var STATUS_CODE = [
-      'Submitted',
-      'HR Interview',
-      '1st Interview',
-      '2nd Interview',
-      'Accepted',
-      'Rejected'
-    ];
-
-    // Initialize applications list from localStorage, else initialize to empty array
-    var applications = JSON.parse(localStorage.getItem(STORAGE_IDENTIFIER)) || [];
+    var applications = DataPersistenceFactory.getApplications();
 
     // TOFIX: This doesn't protect the data
     ApplicationFactory.getApplications = function () {
       return applications;
-    };
-
-    ApplicationFactory.getStatusCode = function () {
-      return STATUS_CODE;
     };
 
     /**
@@ -38,39 +24,39 @@ angular.module('applicationFactory', [])
       applications.push(applicationEntry);
 
       // TODO: Reverse the direction. Observe changes to applications instead of calling manually
-      ApplicationFactory.updateStorage();
+      ApplicationFactory.persist();
     };
 
     /**
      * Remove an existing application from the list
-     * @param {int} applicationIndex
+     * @param {!Application} applicationEntry
      */
-    ApplicationFactory.removeApplication = function (applicationIndex) {
-      applications.splice(applicationIndex, 1);
+    ApplicationFactory.removeApplication = function (applicationEntry) {
+      applications.splice(applications.indexOf(applicationEntry), 1);
 
       // TODO: Reverse the direction. Observe changes to applications instead of calling manually
-      ApplicationFactory.updateStorage();
+      ApplicationFactory.persist();
     };
 
     /**
      * Update application status
-     * @param {Int} applicationIndex
+     * @param {!Application} applicationEntry
      * @param {Int} statusCode
      */
-    ApplicationFactory.updateStatus = function (applicationIndex, statusCode) {
-      applications[applicationIndex].status = STATUS_CODE[statusCode];
+    ApplicationFactory.updateStatus = function (applicationEntry, status) {
+      applicationEntry.status = status;
 
       // TODO: Reverse the direction. Observe changes to applications instead of calling manually
-      ApplicationFactory.updateStorage();
+      ApplicationFactory.persist();
     };
 
     /**
      *
-     * @param {int} applicationIndex
+     * @param {!Application} applicationEntry
      * @param {!Date} newDate Javascript Native Date Object
      */
-    ApplicationFactory.updateDate = function (applicationIndex, newDate) {
-      applications[applicationIndex].date = newDate;
+    ApplicationFactory.updateDate = function (applicationEntry, newDate) {
+      applicationEntry.date = newDate;
     };
 
     /**
@@ -78,29 +64,28 @@ angular.module('applicationFactory', [])
      * @param {Int} applicationEntry
      * @param {Int} newNote
      */
-    ApplicationFactory.updateNote = function (applicationIndex, newNote) {
-      applications[applicationIndex].note = newNote;
+    ApplicationFactory.updateNote = function (applicationEntry, newNote) {
+      applicationEntry.note = newNote;
 
       // TODO: Reverse the direction. Observe changes to applications instead of calling manually
-      ApplicationFactory.updateStorage();
+      ApplicationFactory.persist();
     };
 
     /**
      * Get application note give list index
-     * @param {Int} applicationIndex
+     * @param {!Application} applicationEntry
      * @returns {String}
      */
     ApplicationFactory.getNote = function (applicationIndex) {
-      return applications[applicationIndex].note;
+      return applicationIndex.note;
     };
 
     /**
      * Update local storage to persist state
-     * Currently this is triggered manually. Ideally we should observe the model and update accordingly.
+     * TODO: Currently this is triggered manually. Ideally we should observe the model and update accordingly.
      */
-    ApplicationFactory.updateStorage = function () {
-      // Use angular.Json to filter out ng-repeat book-keeping headers ($$hash)
-      localStorage.setItem(STORAGE_IDENTIFIER, angular.toJson(applications));
+    ApplicationFactory.persist = function () {
+      DataPersistenceFactory.persist(applications);
     };
 
     return ApplicationFactory;

@@ -5,31 +5,31 @@
     <th>#</th>
     <th>Company</th>
     <th>Position</th>
-    <th>Status</th>
-    <th>Last Updated</th>
+    <th><a ng-click="ctrl.changePredicate(ctrl.orderByStatus)" href>Status</a></th>
+    <th><a ng-click="ctrl.changePredicate(ctrl.orderByDate)" href>Last Updated</a></th>
     <th>Note</th>
   </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="entry in ctrl.applications">
+  <tr ng-repeat="entry in ctrl.applications | orderBy:ctrl.predicate:ctrl.reverse">
     <td>{{$index}}</td>
     <td>{{entry.company}}</td>
     <td><a href="{{entry.link}}" target="_blank">{{entry.position}}</a></td>
     <td class="dropdown dropdown-toggle" dropdown dropdown-toggle>
-      <a href >{{entry.status}}</a>
+      <a href >{{entry.status.name}}</a>
       <ul class="dropdown-menu">
-        <li ng-repeat="choice in ctrl.statusCode">
-          <a ng-click="ctrl.updateStatus($parent.$index, $index)" href>{{choice}}</a>
+        <li ng-repeat="status in ctrl.statusList">
+          <a ng-click="ctrl.updateStatus(entry, status)" href>{{status.name}}</a>
         </li>
       </ul>
     </td>
     <td>{{entry.date|date:'shortDate'}}</td>
-    <td class="dropdown dropdown-toggle" toggled-display toggled-display-toggle on-toggle="ctrl.textareaToggled(open, $index)">
+    <td class="dropdown dropdown-toggle" toggled-display toggled-display-toggle on-toggle="ctrl.textareaToggled(open, $index, entry)">
       {{entry.note}}
       <textarea class="toggled-display-area" toggled-display-area></textarea>
     </td>
     <td>
-      <button class="btn btn-xs" ng-click="ctrl.removeApplication($index)" aria-label="Remove">X</button>
+      <button class="btn btn-xs" ng-click="ctrl.removeApplication(entry)" aria-label="Remove">X</button>
     </td>
   </tr>
   </tbody>

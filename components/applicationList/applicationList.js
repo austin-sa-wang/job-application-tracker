@@ -3,9 +3,9 @@
 /**
  * Application List component
  */
-angular.module('applicationList', ['applicationFactory', 'ui.bootstrap', 'ui.bootstrap.toggledDisplay'])
+angular.module('applicationList', ['applicationFactory', 'applicationStatusFactory', 'ui.bootstrap', 'ui.bootstrap.toggledDisplay'])
 
-  .controller('applicationListCtrl', function (ApplicationFactory) {
+  .controller('applicationListCtrl', function (ApplicationFactory, ApplicationStatusFactory) {
     var _this = this;
 
     //this.statusOrderFilter = function (item) {
@@ -14,21 +14,21 @@ angular.module('applicationList', ['applicationFactory', 'ui.bootstrap', 'ui.boo
 
     this.applications = ApplicationFactory.getApplications();
 
-    this.statusCode = ApplicationFactory.getStatusCode();
+    this.statusList = ApplicationStatusFactory.getStatusList();
 
-    this.removeApplication = function(index) {
-      ApplicationFactory.removeApplication(index);
+    this.removeApplication = function(applicationEntry) {
+      ApplicationFactory.removeApplication(applicationEntry);
     };
 
     /**
      * Callback to update status. As well, update date to today to reflect last updated date
      * Used in application_list.html's nested ng-repeat for status dropdown menu
-     * @param {Int} applicationIndex
-     * @param {Int} statusCode
+     * @param {!Application} applicationEntry
+     * @param {String} status
      */
-    this.updateStatus = function (applicationIndex, statusCode) {
-      ApplicationFactory.updateStatus(applicationIndex, statusCode);
-      ApplicationFactory.updateDate(applicationIndex, Date.now());
+    this.updateStatus = function (applicationEntry, status) {
+      ApplicationFactory.updateStatus(applicationEntry, status);
+      ApplicationFactory.updateDate(applicationEntry, Date.now());
     };
 
     /**
@@ -45,13 +45,38 @@ angular.module('applicationList', ['applicationFactory', 'ui.bootstrap', 'ui.boo
      * Used in application_list.html's toggledDisplay
      * @param {Boolean} isOpen
      * @param {Int} index
+     * @param {!Application} applicationEntry
      */
-    this.textareaToggled = function(isOpen, index) {
+    this.textareaToggled = function(isOpen, index, applicationEntry) {
       if (isOpen) {
-        textarea(index).val( ApplicationFactory.getNote(index) );
+        textarea(index).val( ApplicationFactory.getNote(applicationEntry) );
       } else {
-        ApplicationFactory.updateNote( index, textarea(index).val() );
+        ApplicationFactory.updateNote( applicationEntry, textarea(index).val() );
       }
+    };
+
+    // List ordering
+    this.orderByDate = 'date';
+    this.orderByStatus = ApplicationStatusFactory.getStatusValueFunction();
+
+    this.predicate = this.orderByStatus;
+    var prevPredicate = this.predicate;
+    this.reverse = true;
+
+    var toggleOrder = function () {
+      _this.reverse = !_this.reverse;
+    };
+
+    /**
+     * Change predicate for ordering the applications
+     * @param {String|Function|Array} newPredicate
+     */
+    this.changePredicate = function (newPredicate) {
+      if (prevPredicate === newPredicate) {
+        toggleOrder();
+      }
+      _this.predicate = newPredicate;
+      prevPredicate = _this.predicate;
     };
   })
 

@@ -1,20 +1,36 @@
-.toggled-display-area {
+/* Toggled Display dependency for show-and-hide */
+[toggled-display-area] {
+  display: none;
   position: absolute;
   top: 100%;
   left: 0;
   z-index: 1000;
-  display: none;
   float: left;
-  min-width: 300px;
-  min-height: 150px;
   padding: 5px 0;
   margin: 2px 0 0;
   font-size: 14px;
   text-align: left;
 }
 
-.open > .toggled-display-area {
+.open > [toggled-display-area] {
   display: block;
+}
+
+/* Toggle Display display element */
+textarea {
+  display: block;
+  min-width: 300px;
+  min-height: 150px;
+}
+
+div[toggled-display-area] {
+  background-color: #DDDDDD;
+  border: 1px solid #BBBBBB;
+  padding: 5px;
+}
+
+#backup-restore-button-group {
+  border: 1px solid grey;
 }
 
 /* Keep the remove button column width to minimal */
