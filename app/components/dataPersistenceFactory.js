@@ -53,5 +53,21 @@ angular.module('dataPersistenceFactory', ['applicationStatusFactory'])
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(applicationList, toJsonReplacer));
     };
 
+    /**
+     * Get serialized application list
+     * @returns {String} JSON
+     */
+    DataPersistenceFactory.getSerializedApplicationList = function () {
+      return localStorage.getItem(LOCAL_STORAGE_KEY);
+    };
+
+    /**
+     *
+     * @param data
+     */
+    DataPersistenceFactory.restoreApplications = function (data) {
+      localStorage.setItem(LOCAL_STORAGE_KEY, data);
+    };
+
     return DataPersistenceFactory;
   });

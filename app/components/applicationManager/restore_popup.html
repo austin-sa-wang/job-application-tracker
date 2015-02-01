@@ -1,0 +1,9 @@
+<div class="dropdown" toggled-display on-toggle="ctrl.backupButtonToggled(open)">
+  <button class="btn btn-success" toggled-display-toggle>Restore</button>
+  <div toggled-display-area>
+    <small>Paste the backup text in here and click 'proceed'</small>
+    <p class="bg-primary">{{ctrl.errorText}}</p>
+    <textarea></textarea>
+    <button ng-click="ctrl.restoreApplications()" class="btn btn-success">Proceed</button>
+  </div>
+</div>

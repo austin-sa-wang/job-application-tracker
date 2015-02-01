@@ -11,5 +11,6 @@
 angular
   .module('jobApplicationTrackerApp', [
     'applicationList',
-    'applicationAdd'
+    'applicationAdd',
+    'backupManager'
   ]);
