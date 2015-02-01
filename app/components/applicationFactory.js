@@ -4,13 +4,30 @@
  * ApplicationFactory
  * Manage applications.
  */
-angular.module('applicationFactory', [])
+angular.module('applicationFactory', ['applicationStatusFactory'])
 
-  .factory('ApplicationFactory', function ApplicationFactory () {
+  .factory('ApplicationFactory', function ApplicationFactory (ApplicationStatusFactory) {
     var STORAGE_IDENTIFIER = 'applications';
 
-    // Initialize applications list from localStorage, else initialize to empty array
-    var applications = JSON.parse(localStorage.getItem(STORAGE_IDENTIFIER)) || [];
+    var applications = (/**
+       * Initialize applications list from localStorage, replacing status names with status objects
+       * Initialize to empty array if existing list does not exist
+       * @returns {Array}
+       */
+        function () {
+        var applications = JSON.parse(localStorage.getItem(STORAGE_IDENTIFIER));
+        if (Object.prototype.toString.call(applications) === '[object Array]') {
+          // Replace status names with status objects
+          var currentAppl;
+          for (var i = 0; i < applications.length; i+=1) {
+            currentAppl = applications[i];
+            currentAppl.status = ApplicationStatusFactory.getStatusObject(currentAppl.status);
+          }
+          return applications;
+        } else {
+          return [];
+        }
+      })();
 
     // TOFIX: This doesn't protect the data
     ApplicationFactory.getApplications = function () {
@@ -82,12 +99,30 @@ angular.module('applicationFactory', [])
     };
 
     /**
+     * JSON replacer function to
+     * 1. remove AngularJS ngRepeat array bookkeeping overhead, and
+     * 2. replace status object with its name.
+     *
+     * @param key
+     * @param value
+     * @returns {*}
+     */
+    var toJsonReplacer = function (key, value) {
+      var val = value;
+      if (typeof key === 'string' && key.charAt(0) === '$' && key.charAt(1) === '$') {
+        val = undefined;
+      } else if (key === 'status') {
+        val = value.name;
+      }
+      return val;
+    };
+
+    /**
      * Update local storage to persist state
-     * Currently this is triggered manually. Ideally we should observe the model and update accordingly.
+     * TODO: Currently this is triggered manually. Ideally we should observe the model and update accordingly.
      */
     ApplicationFactory.updateStorage = function () {
-      // Use angular.Json to filter out ng-repeat book-keeping headers ($$hash)
-      localStorage.setItem(STORAGE_IDENTIFIER, angular.toJson(applications));
+      localStorage.setItem(STORAGE_IDENTIFIER, JSON.stringify(applications, toJsonReplacer));
     };
 
     return ApplicationFactory;

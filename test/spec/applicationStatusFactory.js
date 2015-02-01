@@ -44,5 +44,12 @@ describe('applicationStatusFactory', function () {
     });
   });
 
+  it('should look up status object given status name', function () {
+    expect(ApplicationStatusFactory.getStatusObject('Submitted')).toEqual(ApplicationStatusFactory.SUBMIT);
+    expect(ApplicationStatusFactory.getStatusObject('1st Interview')).toEqual(ApplicationStatusFactory.FIRST);
+  });
 
+  it('should look up status name give status object', function () {
+    expect(ApplicationStatusFactory.SUBMIT.getName).toEqual('Submitted');
+  })
 });
