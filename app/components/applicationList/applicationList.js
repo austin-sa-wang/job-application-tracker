@@ -56,12 +56,12 @@ angular.module('applicationList', ['applicationFactory', 'applicationStatusFacto
     };
 
     // List ordering
-    this.predicate = 'company';
-    this.reverse = false;
-    var prevPredicate = '';
-
     this.orderByDate = 'date';
     this.orderByStatus = ApplicationStatusFactory.getStatusValueFunction();
+
+    this.predicate = this.orderByStatus;
+    var prevPredicate = this.predicate;
+    this.reverse = true;
 
     var toggleOrder = function () {
       _this.reverse = !_this.reverse;
